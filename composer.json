@@ -1,19 +1,19 @@
 {
   "name": "aimes/module-checkout-designs-example",
-  "description": "Example configurations for aimes/module-checkout-designs",
   "type": "magento2-module",
+  "description": "Example configurations for aimes/module-checkout-designs",
+  "license": [
+    "GPL-3.0-or-later"
+  ],
   "require": {
     "aimes/module-checkout-designs": "*"
   },
-  "license": [
-    "Proprietary"
-  ],
   "autoload": {
-    "files": [
-      "registration.php"
-    ],
     "psr-4": {
       "Aimes\\CheckoutDesignsExample\\": ""
-    }
+    },
+    "files": [
+      "registration.php"
+    ]
   }
 }
