@@ -1,19 +1,26 @@
 {
-  "name": "aimes/module-checkout-designs-example",
-  "type": "magento2-module",
-  "description": "Example configurations for aimes/module-checkout-designs",
-  "license": [
-    "GPL-3.0-or-later"
-  ],
-  "require": {
-    "aimes/module-checkout-designs": "*"
-  },
-  "autoload": {
-    "psr-4": {
-      "Aimes\\CheckoutDesignsExample\\": ""
+    "name": "aimes/module-checkout-designs-example",
+    "type": "magento2-module",
+    "description": "Example configurations for aimes/module-checkout-designs",
+    "license": [
+        "GPL-3.0-or-later"
+    ],
+    "authors": [
+        {
+            "name": "Rob Aimes",
+            "email": "rob@aimes.dev",
+            "homepage": "https://aimes.dev"
+        }
+    ],
+    "require": {
+        "aimes/module-checkout-designs": "*"
     },
-    "files": [
-      "registration.php"
-    ]
-  }
+    "autoload": {
+        "psr-4": {
+            "Aimes\\CheckoutDesignsExample\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    }
 }
