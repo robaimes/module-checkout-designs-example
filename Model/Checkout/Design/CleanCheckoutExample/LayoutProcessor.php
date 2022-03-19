@@ -4,7 +4,7 @@
  * https://github.com/robaimes
  */
 
-namespace Aimes\CheckoutDesignsExample\Model\Checkout\Design\OneStepExample;
+namespace Aimes\CheckoutDesignsExample\Model\Checkout\Design\CleanCheckoutExample;
 
 use Magento\Checkout\Block\Checkout\LayoutProcessorInterface;
 
