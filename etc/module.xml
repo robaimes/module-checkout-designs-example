@@ -10,6 +10,8 @@
     <module name="Aimes_CheckoutDesignsExample">
         <sequence>
             <module name="Aimes_CheckoutDesigns" />
+            <module name="Rubic_CleanCheckout" />
+            <module name="Rubic_CleanCheckoutTheme" />
         </sequence>
     </module>
 </config>
