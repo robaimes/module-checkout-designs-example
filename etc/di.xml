@@ -7,41 +7,7 @@
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-
-    <!-- Add available designs here via unique keys -->
-    <type name="Aimes\CheckoutDesigns\Model\Config\Source\CheckoutDesigns">
-        <arguments>
-            <argument name="designs" xsi:type="array">
-                <item name="one_step_example" xsi:type="object">
-                    Aimes\CheckoutDesignsExample\Model\Checkout\Design\OneStepExample
-                </item>
-                <item name="three_step_example" xsi:type="object">
-                    Aimes\CheckoutDesignsExample\Model\Checkout\Design\ThreeStepExample
-                </item>
-            </argument>
-        </arguments>
-    </type>
-
     <!-- Declare a virtualType to create a design from the base model -->
-    <virtualType name="Aimes\CheckoutDesignsExample\Model\Checkout\Design\OneStepExample"
-                 type="Aimes\CheckoutDesigns\Model\CheckoutDesign">
-        <arguments>
-            <argument name="code" xsi:type="string">one_step_checkout_example</argument>
-            <argument name="name" xsi:type="string">One Step Checkout Example</argument>
-            <argument name="layoutHandle" xsi:type="string">checkout_design_example_one_step</argument>
-            <argument name="layoutProcessors" xsi:type="array">
-                <item name="defaultProcessor" xsi:type="object">
-                    Aimes\CheckoutDesignsExample\Model\Checkout\Design\OneStepExample\LayoutProcessor
-                </item>
-            </argument>
-            <argument name="configProviders" xsi:type="array">
-                <item name="defaultProvider" xsi:type="object">
-                    Aimes\CheckoutDesignsExample\Model\Checkout\Design\OneStepExample\ConfigProvider
-                </item>
-            </argument>
-        </arguments>
-    </virtualType>
-
     <virtualType name="Aimes\CheckoutDesignsExample\Model\Checkout\Design\ThreeStepExample"
                  type="Aimes\CheckoutDesigns\Model\CheckoutDesign">
         <arguments>
@@ -60,4 +26,42 @@
             </argument>
         </arguments>
     </virtualType>
+
+    <!-- Example for Rubic_CleanCheckout (More specifically the Theme part of the metapackage) -->
+    <virtualType name="Aimes\CheckoutDesignsExample\Model\Checkout\Design\CleanCheckoutExample"
+                 type="Aimes\CheckoutDesigns\Model\CheckoutDesign">
+        <arguments>
+            <argument name="name" translate="true" xsi:type="string">Clean Checkout Example</argument>
+            <argument name="code" xsi:type="const">
+                Aimes\CheckoutDesignsExample\Api\CleanCheckoutExampleInterface::CLEAN_CHECKOUT_DESIGN_CODE
+            </argument>
+            <argument name="layoutHandle" xsi:type="const">
+                Aimes\CheckoutDesignsExample\Api\CleanCheckoutExampleInterface::CLEAN_CHECKOUT_DESIGN_HANDLE
+            </argument>
+            <argument name="layoutProcessors" xsi:type="array">
+                <item name="defaultProcessor" xsi:type="object">
+                    Aimes\CheckoutDesignsExample\Model\Checkout\Design\ThreeStepExample\LayoutProcessor
+                </item>
+            </argument>
+            <argument name="configProviders" xsi:type="array">
+                <item name="defaultProvider" xsi:type="object">
+                    Aimes\CheckoutDesignsExample\Model\Checkout\Design\ThreeStepExample\ConfigProvider
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Add available designs here via unique keys -->
+    <type name="Aimes\CheckoutDesigns\Model\Config\Source\CheckoutDesigns">
+        <arguments>
+            <argument name="designs" xsi:type="array">
+                <item name="three_step_example" xsi:type="object">
+                    Aimes\CheckoutDesignsExample\Model\Checkout\Design\ThreeStepExample
+                </item>
+                <item name="clean_checkout_example" xsi:type="object">
+                    Aimes\CheckoutDesignsExample\Model\Checkout\Design\CleanCheckoutExample
+                </item>
+            </argument>
+        </arguments>
+    </type>
 </config>

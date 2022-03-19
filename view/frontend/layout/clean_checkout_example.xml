@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<!--
+ * Content ported directly from CleanCheckoutTheme module
+ * See: https://github.com/danslo/CleanCheckoutTheme/blob/master/src/view/frontend/layout/checkout_index_index.xml
+
+ * This is neither a a full conversion nor a working example of the CleanCheckout package.
+ * This file should replace the 'checkout_index_index' file within the CleanCheckoutTheme package.
+ */
+ -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Rubic_CleanCheckoutTheme::css/clean-checkout-m.css" />
+        <css src="Rubic_CleanCheckoutTheme::css/clean-checkout-l.css" media="screen and (min-width: 768px)"/>
+        <css src="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" src_type="url" />
+    </head>
+    <body>
+        <referenceContainer name="main">
+            <container name="checkout.messages"
+                       htmlTag="div"
+                       htmlClass="checkout-messages"
+                       before="clean_checkout_logo">
+                <block class="Magento\Framework\View\Element\Template"
+                       name="ajax.message.placeholder"
+                       template="Magento_Theme::html/messages.phtml"/>
+                <block class="Magento\Framework\View\Element\Messages"
+                       name="messages"
+                       as="messages"
+                       template="Magento_Theme::messages.phtml"/>
+            </container>
+
+            <block class="Magento\Theme\Block\Html\Header\Logo"
+                   name="clean_checkout_logo"
+                   before="-"
+                   ifconfig="clean_checkout/cleanup/display_logo">
+                <arguments>
+                    <argument name="logo_img_width" xsi:type="number">200</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+
+        <referenceBlock name="head.additional">
+            <block class="Rubic\CleanCheckoutTheme\Block\Customizer"
+                   name="clean_checkout_customizer"
+                   template="customizer.phtml" />
+        </referenceBlock>
+
+        <referenceContainer name="content">
+            <container name="cleancheckout_footer_wrapper"
+                       after="checkout.root"
+                       htmlTag="div"
+                       htmlClass="clean-checkout-footer-wrapper">
+                <block class="Rubic\CleanCheckoutTheme\Block\BackToStore"
+                       name="clean_checkout_back_to_store"
+                       template="back-to-store.phtml"
+                       ifconfig="clean_checkout/back_to_store/enabled" />
+
+                <block class="Rubic\CleanCheckoutTheme\Block\Footer"
+                       name="clean_checkout_footer"
+                       after="clean_checkout_back_to_store"
+                       template="footer.phtml" />
+            </container>
+        </referenceContainer>
+
+        <referenceBlock name="checkout.root">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="checkout" xsi:type="array">
+                            <item name="children" xsi:type="array">
+                                <!--
+                                 Progress bar mixin disabled, which only updated the component template.
+                                 Updated here instead as to not pollute other designs.
+                                -->
+                                <item name="progressBar" xsi:type="array">
+                                    <item name="config" xsi:type="array">
+                                        <item name="template" xsi:type="string">Rubic_CleanCheckoutTheme/progress-bar</item>
+                                    </item>
+                                </item>
+                                <item name="steps" xsi:type="array">
+                                    <item name="children" xsi:type="array">
+                                        <item name="email-step" xsi:type="array">
+                                            <item name="component" xsi:type="string">Rubic_CleanCheckoutTheme/js/view/email</item>
+                                            <item name="sortOrder" xsi:type="string">0</item>
+                                            <item name="children" xsi:type="array">
+                                                <item name="customer-email" xsi:type="array">
+                                                    <item name="component" xsi:type="string">Magento_Checkout/js/view/form/element/email</item>
+                                                    <item name="template" xsi:type="string">Rubic_CleanCheckoutTheme/form/element/email</item>
+                                                    <item name="displayArea" xsi:type="string">login-methods</item>
+                                                    <item name="tooltip" xsi:type="array">
+                                                        <item name="description" xsi:type="string" translate="true">We'll send your order confirmation here.</item>
+                                                    </item>
+                                                    <item name="children" xsi:type="array">
+                                                        <item name="before-login-form" xsi:type="array">
+                                                            <item name="component" xsi:type="string">uiComponent</item>
+                                                            <item name="displayArea" xsi:type="string">before-login-form</item>
+                                                            <item name="children" xsi:type="array">
+                                                                <!-- before login form fields -->
+                                                            </item>
+                                                        </item>
+                                                        <item name="additional-login-form-fields" xsi:type="array">
+                                                            <item name="component" xsi:type="string">uiComponent</item>
+                                                            <item name="displayArea" xsi:type="string">additional-login-form-fields</item>
+                                                            <item name="children" xsi:type="array">
+                                                                <!-- additional login form fields -->
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                        <item name="shipping-step" xsi:type="array">
+                                            <item name="children" xsi:type="array">
+                                                <item name="shippingAddress" xsi:type="array">
+                                                    <!--
+                                                    Currently, the shipping step is modified by a mixin, which would need disabling.
+                                                    The component on the shipping step requires overriding to prevent modification of other 'designs' logic.
+                                                    This component would extend the default shipping component.<item name="component" xsi:type="string">Magento_Checkout/js/view/shipping</item>
+                                                    By doing this, we're inherently trying to prevent 'abusive' mixins from being used.
+                                                    -->
+                                                    <item name="component" xsi:type="string">
+                                                        Aimes_CheckoutDesignsExample/js/clean-checkout/view/shipping
+                                                    </item>
+                                                    <item name="children" xsi:type="array">
+                                                        <item name="customer-email" xsi:type="array">
+                                                            <item name="config" xsi:type="array">
+                                                                <item name="componentDisabled" xsi:type="boolean">true</item>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                        <item name="billing-step" xsi:type="array">
+                                            <item name="children" xsi:type="array">
+                                                <item name="payment" xsi:type="array">
+                                                    <!-- Mixin disabled to prevent polluting other designs, custom component used instead -->
+                                                    <item name="component" xsi:type="string">
+                                                        Aimes_CheckoutDesignsExample/js/clean-checkout/view/payment
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>
